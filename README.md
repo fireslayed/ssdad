@@ -123,92 +123,8 @@
       margin-bottom: 16px;
       display: flex;
       align-items: center;
-      gap: 0;
+      gap: 12px;
       flex-wrap: wrap;
-      background: #4a5568;
-      border-radius: 8px;
-      padding: 0;
-      position: relative;
-      overflow: visible;
-      z-index: 10000;
-    }
-    .toolbar::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #ff7a85, #4ade80, #8b5cf6, #06b6d4, #f59e0b);
-    }
-    .nav-button {
-      background: transparent;
-      color: white;
-      border: none;
-      padding: 16px 24px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      border-radius: 0;
-      font-size: 14px;
-    }
-    .nav-button:hover {
-      background: rgba(255,255,255,0.1);
-    }
-    .nav-button.active {
-      background: linear-gradient(135deg, #ff7a85, #a855f7);
-      color: white;
-    }
-    .dropdown-container {
-      position: relative;
-      display: inline-block;
-      z-index: 10002;
-    }
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #ff7a85, #a855f7);
-      border-radius: 8px;
-      min-width: 200px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      z-index: 10001;
-      overflow: hidden;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(-50%) translateY(-10px);
-      transition: all 0.3s ease;
-    }
-    .dropdown-menu.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
-    .dropdown-item {
-      padding: 12px 20px;
-      cursor: pointer;
-      color: white;
-      font-weight: 500;
-      transition: background 0.2s ease;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .dropdown-item:last-child {
-      border-bottom: none;
-    }
-    .dropdown-item:hover {
-      background: rgba(255,255,255,0.2);
-    }
-    .notification-bell {
-      position: relative;
-      cursor: pointer;
-      padding: 16px 20px;
-      color: white;
-      transition: background 0.3s ease;
-    }
-    .notification-bell:hover {
-      background: rgba(255,255,255,0.1);
     }
     .notification-bell {
       position: relative;
@@ -284,27 +200,27 @@
     <div class="toolbar">
       <div class="notification-bell" onclick="toggleNotifications()">
         <span id="notifBadge" class="notification-badge" style="display:none;">0</span>
-        🔔 Bildirimler
-        <div id="orderNotificationPopup" style="display:none; position:absolute; top:100%; left:0; background:#1e1e2f; padding:15px; border-radius:10px; width:300px; box-shadow:0 4px 8px rgba(0,0,0,0.5); z-index:9999; max-height:300px; overflow-y:auto;">
+        🔔
+        <div id="orderNotificationPopup" style="display:none; position:absolute; top:40px; left:0; background:#1e1e2f; padding:15px; border-radius:10px; width:300px; box-shadow:0 4px 8px rgba(0,0,0,0.5); z-index:9999; max-height:300px; overflow-y:auto;">
           <h4>📦 Gelen Siparişler</h4>
           <div id="orderList"></div>
         </div>
       </div>
       
-      <button class="nav-button" onclick="openUserPanel()">👥 Kullanıcı Yönetimi</button>
+      <button onclick="openUserPanel()" style="background:#4f8df9; color:white; padding:10px 16px; border:none; border-radius:6px; cursor:pointer; font-weight:500;">👥 Kullanıcı Yönetimi</button>
       
-      <div class="dropdown-container">
-        <button class="nav-button" onclick="togglePartsDropdown()">🔧 Yedek Parça ▼</button>
-        <div id="partsDropdown" class="dropdown-menu">
-          <div class="dropdown-item" onclick="openOrderPanel()">📦 Parça Siparişi</div>
-          <div class="dropdown-item" onclick="openPartAddPanel()">➕ Parça Ekle</div>
-          <div class="dropdown-item" onclick="openPartListPanel()">📋 Parça Listesi</div>
+      <div style="position:relative; display:inline-block;">
+        <button onclick="togglePartsDropdown()" style="background:#28a745; color:white; padding:10px 16px; border:none; border-radius:6px; cursor:pointer; font-weight:500;">🔧 Yedek Parça ▼</button>
+        <div id="partsDropdown" style="display:none; position:absolute; top:100%; left:0; background:#1e1e2f; border:1px solid #444; border-radius:6px; min-width:150px; box-shadow:0 4px 8px rgba(0,0,0,0.5); z-index:1000;">
+          <div onclick="openOrderPanel()" style="padding:10px 15px; cursor:pointer; border-bottom:1px solid #333; color:#ffa500; font-weight:500;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='transparent'">📦 Parça Siparişi</div>
+          <div onclick="openPartAddPanel()" style="padding:10px 15px; cursor:pointer; border-bottom:1px solid #333; color:#28a745; font-weight:500;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='transparent'">➕ Parça Ekle</div>
+          <div onclick="openPartListPanel()" style="padding:10px 15px; cursor:pointer; color:#e67e22; font-weight:500;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='transparent'">📋 Parça Listesi</div>
         </div>
       </div>
       
-      <button class="nav-button" onclick="openRequestListPanel()">📋 İstek Listesi</button>
-      <button class="nav-button" onclick="openDailyReportPanel()">📝 Günlük Rapor</button>
-      <button class="nav-button" onclick="openDailyActivitiesPanel()">📊 Günlük Faaliyetler</button>
+      <button onclick="openRequestListPanel()" style="background:#6c5ce7; color:white; padding:10px 16px; border:none; border-radius:6px; cursor:pointer; font-weight:500;">📋 İstek Listesi</button>
+      <button onclick="openDailyReportPanel()" style="background:#2ecc71; color:white; padding:10px 16px; border:none; border-radius:6px; cursor:pointer; font-weight:500;">📝 Günlük Rapor</button>
+      <button onclick="openDailyActivitiesPanel()" style="background:#9b59b6; color:white; padding:10px 16px; border:none; border-radius:6px; cursor:pointer; font-weight:500;">📊 Günlük Faaliyetler</button>
     </div>
 
     <!-- Parça Sipariş Paneli -->
@@ -915,20 +831,7 @@ function toggleNotifications() {
 
 function togglePartsDropdown() {
   var dropdown = document.getElementById('partsDropdown');
-  dropdown.classList.toggle('show');
-}
-
-function setActiveButton(buttonElement) {
-  // Tüm butonlardan active class'ını kaldır
-  var buttons = document.querySelectorAll('.nav-button');
-  buttons.forEach(function(btn) {
-    btn.classList.remove('active');
-  });
-  
-  // Tıklanan butona active class'ı ekle
-  if (buttonElement) {
-    buttonElement.classList.add('active');
-  }
+  dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
 }
 
 // Sipariş fonksiyonları
@@ -1385,8 +1288,8 @@ window.onload = function() {
     }
     
     var dropdown = document.getElementById('partsDropdown');
-    if (dropdown && dropdown.classList.contains('show') && !e.target.closest('.dropdown-container')) {
-      dropdown.classList.remove('show');
+    if (dropdown && dropdown.style.display === 'block' && !e.target.closest('[onclick="togglePartsDropdown()"]') && !dropdown.contains(e.target)) {
+      dropdown.style.display = 'none';
     }
     
     var searchResults = document.getElementById('searchResults');
